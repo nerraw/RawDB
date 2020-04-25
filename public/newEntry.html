@@ -1,0 +1,277 @@
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>RawDB</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!--NAVBAR HEADER-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">RawDB</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Add Card<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--MAIN CONTAINER-->
+        <div class="container">
+
+            <!--Input Form-->
+            <form class="mt-4" action="/newEntry" method="POST">
+                <div class="form-group row">
+                    <!--Card Name-->
+                    <label for="cardName" class="pl-3 col-form-label">Card Name</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="cardName" id="cardName" placeholder="" />
+                    </div>
+                    <!--Fortitude-->
+                    <label for="fortitude" class="col-md-1 col-form-label">Fortitude</label>
+                    <div class="col-md-1">
+                        <input type="number" class="form-control" name="fortitude" id="fortitude" placeholder="" />
+                    </div>
+                    <!--Damage-->
+                    <label for="damage" class="col-md-1 col-form-label">Damage</label>
+                    <div class="col-md-1">
+                        <input type="number" class="form-control" name="damage" id="damage" placeholder="" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!--Card Type-->
+                    <fieldset class="col-md-3 form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-md-5 pr-0">Card Type</legend>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridCardTypes" id="prematch" value="Prematch" />
+                                    <label class="form-check-label" for="prematch">Pre-Match</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridCardTypes" id="midmatch" value="Midmatch" />
+                                    <label class="form-check-label" for="midmatch">Mid-Match</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridCardTypes" id="maneuver" value="Maneuver" />
+                                    <label class="form-check-label" for="maneuver">Maneuver</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridCardTypes" id="action" value="Action" />
+                                    <label class="form-check-label" for="action">Action</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridCardTypes" id="reversal" value="Reversal" />
+                                    <label class="form-check-label" for="reversal">Reversal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="col">
+                        <div class="form-group row">
+                            <!--SubType-->
+                            <label for="subtype" class="col-md-1 col-form-label">Subtype</label>
+                            <div class="col-md-2">
+                                <select type="text" class="form-control" name="subtype" id="subtype">
+                                    <option selected>None</option>
+                                    <option>Fued</option>
+                                    <option>Stipulation</option>
+                                    <option>Manager</option>
+                                    <option>Strike</option>
+                                    <option>Grapple</option>
+                                    <option>Submission</option>
+                                    <option>High Risk</option>
+                                    <option>Trademark Finisher</option>
+                                </select>
+                            </div>
+                            <!--MultiType-->
+                            <label for="multi" class="col-md-1 col-form-label">Multi</label>
+                            <div class="col-md-2">
+                                <select type="text" class="form-control" name="multi" id="multi">
+                                    <option selected>None</option>
+                                    <option>Action</option>
+                                    <option>Strike</option>
+                                    <option>Grapple</option>
+                                    <option>Submission</option>
+                                    <option>High Risk</option>
+                                </select>
+                            </div>
+                            <!--Stun-->
+                            <label for="stun" class="col-md-1 col-form-label">Stun</label>
+                            <div class="col-md-2">
+                                <select type="number" class="form-control" name="stun" id="stun">
+                                    <option selected>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <!--Brand-->
+                            <label for="brand" class="col-md-1 col-form-label">Brand</label>
+                            <div class="col-md-2">
+                                <select type="text" class="form-control" name="brand" id="brand">
+                                    <option selected>None</option>
+                                    <option>Raw</option>
+                                    <option>Smackdown</option>
+                                </select>
+                            </div>
+                            <!--Alignment-->
+                            <fieldset class="col-md-3 form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-md-5 pr-0">Alignment</legend>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="gridAlignment" id="face" value="Face" />
+                                            <label class="form-check-label" for="face">Face</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="gridAlignment" id="heel" value="Heel" />
+                                            <label class="form-check-label" for="heel">Heel</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <!--Stun-->
+                            <label for="superstar" class="col-form-label">Superstar</label>
+                            <div class="col-md-2">
+                                <select type="text" class="form-control" name="superstar" id="superstar">
+                                    <option selected>None</option>
+                                    <option>APA</option>
+                                    <option>Big Freak'n' Machine</option>
+                                    <option>The Rock</option>
+                                    <option>Trish Stratus</option>
+                                    <option>X-Pac</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!--Misc.-->
+                    <!--Unique, Universally Uniqe, Active, RMS, Permanent, Foreign Object, Tag-team, Run-in, Set-up-->
+                    <fieldset class="col-md-6 form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-md-3 pr-0">Miscellaneous</legend>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="unique" value="unique" />
+                                    <label class="form-check-label" for="unqiue">Unique</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="uunique" value="uunique" />
+                                    <label class="form-check-label" for="uunique">Universally Unique</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="active" value="active" />
+                                    <label class="form-check-label" for="active">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="rms" value="rms" />
+                                    <label class="form-check-label" for="rms">RMS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="tagteam" value="tagteam" />
+                                    <label class="form-check-label" for="tagteam">Tag Team</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="permanent" value="permanent" />
+                                    <label class="form-check-label" for="permanent">Permanent</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="foreignobject" value="foreignobject" />
+                                    <label class="form-check-label" for="foreignobject">Foreign Object</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="runin" value="runin" />
+                                    <label class="form-check-label" for="runin">Run-In</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="gridMisc" id="setup" value="setup" />
+                                    <label class="form-check-label" for="setup">Set-Up</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--MultiType-->
+                    <label for="Set" class="col-md-1 col-form-label">Set</label>
+                    <div class="col-md-2">
+                        <select type="text" class="form-control" name="set" id="set">
+                            <option selected>Premier</option>
+                            <option>Survivor Series</option>
+                            <option>Survivor Serier 2</option>
+                            <option>Insurrextion</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!--Card Text-->
+                    <label for="cardText" class="pl-3 col-md-2 col-form-label pt-0 text-md-right text-center">Card Text</label>
+                    <div class="col-md-10">
+                        <textarea class="form-control" name="cardText" id="cardText" placeholder="" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!--Flavor Text-->
+                    <label for="flavorText" class="pl-3 col-md-2 col-form-label text-md-right text-center">Flavor Text</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="flavorText" id="flavorText" placeholder=""></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <!--Image URL-->
+                    <label for="imageURL" class="pl-3 col-md-2 col-form-label text-md-right text-center">Image URL</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="imageURL" id="imageURL" placeholder=""></input>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Add Card</button>
+                    </div>
+                </div>
+            </form>
+            <h6 class="text-center mt-4">Recently Added</h6>
+            <div class="row">
+                <ul class="col-md-4 offset-md-4  col-sm-6 offset-sm-3 col-xs-8 offset-xs-2 list-group">
+                    <li class="list-group-item" v-for="card in cards" :key="card.cardName">
+                        <a v-bind:href="'/cards/'+card._id">{{ card.cardName }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="newEntry.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
